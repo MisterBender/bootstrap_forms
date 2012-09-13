@@ -74,7 +74,7 @@ describe "BootstrapForms::FormBuilder" do
     end
 
     context "an attribute with a PresenceValidator" do
-      it "adds the required attribute" do
+      it "adds the required attribute" do 
         @builder.text_field("owner").should match /<input .*required="required"/
       end
     end
@@ -100,28 +100,6 @@ describe "BootstrapForms::FormBuilder" do
     end
 
     it_behaves_like 'a bootstrap form'
-  end
-
-  context "with index option" do
-    before(:each) do
-      @project = Project.new
-      @template = ActionView::Base.new
-      @template.output_buffer = ""
-      @builder = BootstrapForms::FormBuilder.new(:item, @project, @template, { :index => 123 }, proc {})
-    end
-
-    it_behaves_like 'a bootstrap form with index option', 123
-  end
-
-  context "with namespace option" do
-    before(:each) do
-      @project = Project.new
-      @template = ActionView::Base.new
-      @template.output_buffer = ""
-      @builder = BootstrapForms::FormBuilder.new(:item, @project, @template, { :namespace => 'my_name' }, proc {})
-    end
-
-    it_behaves_like 'a bootstrap form with namespace option', 'my_name'
   end
 end
 

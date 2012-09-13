@@ -142,7 +142,7 @@ shared_examples "a bootstrap form" do
 
     context "label option" do
       %w(select email_field file_field number_field password_field search_field text_area text_field url_field).each do |method_name|
-
+        
         it "should not add a label when ''" do
           @builder.send(method_name.to_sym, 'name', :label => '').should_not match /<\/label>/
         end
@@ -195,20 +195,4 @@ shared_examples "a bootstrap form" do
       end
     end
   end # actions
-end
-
-shared_examples "a bootstrap form with index option" do |index|
-  describe "check_box" do
-    it "generates wrapped input that uses the form index" do
-      @builder.check_box("name").should == "<div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\" for=\"item_#{index}_name\"><input name=\"item[#{index}][name]\" type=\"hidden\" value=\"0\" /><input id=\"item_#{index}_name\" name=\"item[#{index}][name]\" type=\"checkbox\" value=\"1\" />Name</label></div></div>"
-    end
-  end
-end
-
-shared_examples "a bootstrap form with namespace option" do |namespace|
-  describe "check_box" do
-    it "generates wrapped input that uses the form namespace" do
-      @builder.check_box("name").should == "<div class=\"control-group\"><div class=\"controls\"><label class=\"checkbox\" for=\"#{namespace}_item_name\"><input name=\"item[name]\" type=\"hidden\" value=\"0\" /><input id=\"#{namespace}_item_name\" name=\"item[name]\" type=\"checkbox\" value=\"1\" />Name</label></div></div>"
-    end
-  end
 end
