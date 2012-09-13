@@ -44,7 +44,7 @@ module BootstrapForms
           if @field_options[:label] == false || @field_options[:label] == ''
             extras { super(name, *(@args << @field_options)) }
           else
-            label(@name, :class => 'checkbox') do
+            label(@name, @field_options.merge({:class => 'checkbox'})) do
               extras { super(name, *(@args << @field_options)) + (@field_options[:label].blank? ? human_attribute_name : @field_options[:label])}
             end
           end
@@ -57,7 +57,7 @@ module BootstrapForms
       @field_options = opts.merge(required_attribute)
       control_group_div do
         label_field + input_div do
-          values.map do |text, value|            
+          values.map do |text, value|
             if @field_options[:label] == '' || @field_options[:label] == false
               extras { radio_button(name, value, @field_options) + text }
             else
@@ -125,7 +125,7 @@ module BootstrapForms
             value = @field_options.delete(:value)
             @field_options[:class] = [@field_options[:class], 'uneditable-input'].compact
 
-            content_tag(:span, @field_options) do 
+            content_tag(:span, @field_options) do
               value || object.send(@name.to_sym) rescue nil
             end
           end
